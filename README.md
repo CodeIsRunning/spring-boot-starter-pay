@@ -9,7 +9,7 @@
  **2、引入依赖**
 
 ```java
-		<dependency>
+        <dependency>
             <groupId>org.pay.boot</groupId>
             <artifactId>spring-boot-starter-pay</artifactId>
             <version>1.0-SNAPSHOT</version>
@@ -97,7 +97,7 @@ mchId***
 
 ```java
 
-	@Resource
+    @Resource
     AlipayTradeService alipayTradeService;
 
 
