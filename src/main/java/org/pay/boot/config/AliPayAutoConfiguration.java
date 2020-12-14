@@ -1,5 +1,7 @@
 package org.pay.boot.config;
 
+import org.pay.boot.api.ali.service.AliPayEasyService;
+import org.pay.boot.api.ali.service.impl.AliPayEasyServiceImpl;
 import org.pay.boot.core.ali.config.Configs;
 import org.pay.boot.core.ali.service.AlipayTradeService;
 import org.pay.boot.core.ali.service.impl.AlipayTradeServiceImpl;
@@ -22,9 +24,14 @@ public class AliPayAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(AlipayTradeService.class)
-    public AlipayTradeService getAlipayTradeService() {
+    public AlipayTradeService getAliPayTradeService() {
         Configs.init("zfbinfo.properties");
         return new AlipayTradeServiceImpl.ClientBuilder().build();
+    }
+    @Bean
+    @ConditionalOnMissingBean(AliPayEasyService.class)
+    public AliPayEasyService getAliPayEasyService() {
+        return new AliPayEasyServiceImpl();
     }
 
 }

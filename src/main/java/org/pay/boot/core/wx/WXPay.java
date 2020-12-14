@@ -120,7 +120,12 @@ public class WXPay {
         String signTypeInData = reqData.get(WXPayConstants.FIELD_SIGN_TYPE);
         WXPayConstants.SignType signType;
         if (signTypeInData == null) {
-            signType = WXPayConstants.SignType.MD5;
+            if (reqData.get("sign").length()==32){
+                signType = WXPayConstants.SignType.MD5;
+            }else {
+                signType = WXPayConstants.SignType.HMACSHA256;
+            }
+
         }
         else {
             signTypeInData = signTypeInData.trim();
@@ -259,11 +264,13 @@ public class WXPay {
      * 提交刷卡支付，尽可能做成功
      * 内置重试机制，最多30s
      * @param reqData
-     * @param connectTimeoutMs
      * @return
      * @throws Exception
      */
-    public Map<String, String> microPayWithNew(Map<String, String> reqData, int connectTimeoutMs) throws Exception {
+    public Map<String, String> microPayWithNew(Map<String, String> reqData) throws Exception {
+
+        int connectTimeoutMs = 5000;
+
         int remainingTimeMs = 30*1000;
         long startTimestampMs = 0;
         Map<String, String> lastResult = null;

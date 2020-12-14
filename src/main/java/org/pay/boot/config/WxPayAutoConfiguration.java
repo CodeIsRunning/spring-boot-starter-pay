@@ -21,20 +21,17 @@ public class WxPayAutoConfiguration {
     @Autowired
     private IWxPayConfig iWxPayConfig;
 
-    @Autowired
-    private PayLoadConfig payLoadConfig;
 
     @Bean
     @ConditionalOnMissingBean(IWxPayConfig.class)
-    public IWxPayConfig getWxConfigTradeService() throws Exception {
-
+    public IWxPayConfig getWxConfigTradeService(PayLoadConfig payLoadConfig) throws Exception {
 
         return new IWxPayConfig("wxinfo.properties",payLoadConfig.isWxCer());
     }
 
     @Bean
     @ConditionalOnMissingBean(WXPay.class)
-    public WXPay getWxpayTradeService() throws Exception {
+    public WXPay getWxpayTradeService(PayLoadConfig payLoadConfig) throws Exception {
 
         if (payLoadConfig.isWxSandbox()) {
             return new WXPay(iWxPayConfig, true, true);

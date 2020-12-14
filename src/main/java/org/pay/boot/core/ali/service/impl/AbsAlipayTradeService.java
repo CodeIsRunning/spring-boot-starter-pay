@@ -45,8 +45,11 @@ abstract class AbsAlipayTradeService extends AbsAlipayService implements AlipayT
             // 查询发生异常，交易状态未知
             result.setTradeStatus(TradeStatus.UNKNOWN);
 
+        } else if("ACQ.TRADE_NOT_EXIST".equals(response.getSubCode())){
+            // 未查询到
+            result.setTradeStatus(TradeStatus.NOTFUND);
         } else {
-            // 其他情况均表明该订单号交易失败
+            //其他情况均表明该订单号交易失败
             result.setTradeStatus(TradeStatus.FAILED);
         }
         return result;

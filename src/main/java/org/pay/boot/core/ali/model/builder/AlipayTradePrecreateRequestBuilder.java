@@ -31,9 +31,9 @@ public class AlipayTradePrecreateRequestBuilder extends RequestBuilder {
         if (StringUtils.isEmpty(bizContent.subject)) {
             throw new NullPointerException("subject should not be NULL!");
         }
-        if (StringUtils.isEmpty(bizContent.storeId)) {
-            throw new NullPointerException("store_id should not be NULL!");
-        }
+//        if (StringUtils.isEmpty(bizContent.storeId)) {
+//            throw new NullPointerException("store_id should not be NULL!");
+//        }
         return true;
     }
 
